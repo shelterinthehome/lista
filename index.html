@@ -1,0 +1,94 @@
+<!--feito por:Aaron     n:1     Turma:3a
+              Caua      n:4  
+              Otavio    n:24
+              Valentin  n:33
+
+-->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Números</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 400px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+     
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Inserir Números</h2>
+    
+    <input type="number" id="numero" placeholder="Número inteiro" /><br>
+    <button id="inserirBtn">Inserir</button>
+    <button id="ordenarBtn">Ordenar</button>
+    
+    <div id="result"></div>
+    <div id="sortedResult"></div>
+</div>
+
+<script>
+    // Array para armazenar os números
+    let listaNumeros = [];
+
+    // Função para atualizar a lista de números no DOM
+    function atualizarLista() {
+        document.getElementById("result").innerText = "Lista Original: " + listaNumeros.join(", ");
+    }
+
+    // Função de ordenação Bubble Sort
+    function bubbleSort(arr) {
+        let n = arr.length;
+        for (let i = 0; i < n - 1; i++) {
+            for (let j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    // Troca de posições
+                    let temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+        return arr;
+    }
+
+    // Evento de clique para o botão Inserir
+    document.getElementById("inserirBtn").addEventListener("click", function () {
+        let numero = parseInt(document.getElementById("numero").value);
+        if (!isNaN(numero)) {
+            listaNumeros.push(numero);
+            atualizarLista();
+            document.getElementById("numero").value = "";  // Limpa o campo após a inserção
+        }
+    });
+
+    // Evento de clique para o botão Ordenar
+    document.getElementById("ordenarBtn").addEventListener("click", function () {
+        if (listaNumeros.length > 0) {
+            let sortedArray = [...listaNumeros];  // Copia do array original para manter o original
+            bubbleSort(sortedArray);
+            document.getElementById("sortedResult").innerText = "Lista Ordenada: " + sortedArray.join(", ");
+        }
+    });
+</script>
+
+</body>
+</html>
